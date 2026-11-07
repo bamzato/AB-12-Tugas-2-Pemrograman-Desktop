@@ -6,7 +6,7 @@ public class Makanan extends MenuItem {
     // 2. Constructor
     public Makanan(String nama, double harga, String jenisMakanan) {
         super(nama, harga, "Makanan");
-        setJenisMakanan(jenisMakanan);
+        this.setJenisMakanan(jenisMakanan);
     }
 
     // 3. Getter
@@ -27,9 +27,9 @@ public class Makanan extends MenuItem {
     // 5. Method overriding
     @Override
     public void tampilMenu() {
-        System.out.println("Nama           : " + getNama());
-        System.out.println("Harga          : Rp " + getHarga());
-        System.out.println("Kategori       : " + getKategori());
-        System.out.println("Jenis Makanan  : " + getJenisMakanan());
+        System.out.println("Nama           : " + this.getNama());
+        System.out.println("Harga          : Rp " + this.getHarga());
+        System.out.println("Kategori       : " + this.getKategori());
+        System.out.println("Jenis Makanan  : " + this.getJenisMakanan());
     }
 }
