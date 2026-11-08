@@ -6,3 +6,4 @@ MAKANAN|Ayam Bakar|30000.0|Makanan Berat
 MINUMAN|Es Jeruk|7000.0|Minuman Dingin
 MAKANAN|Sate Klathak|30000.0|Makanan Berat
 MINUMAN|Coca Cola|5000.0|Minuman Ringan
+DISKON|Diskon Weekend|10.0
