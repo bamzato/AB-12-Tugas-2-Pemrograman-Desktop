@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class StrukFileManager {
 
@@ -49,6 +50,63 @@ public class StrukFileManager {
 
         } catch (IOException e) {
             System.out.println("Gagal membaca struk: " + e.getMessage());
+        }
+    }
+
+    private File[] ambilDaftarStruk() {
+        File direktori = new File("data/receipts");
+
+        if (!direktori.exists() || !direktori.isDirectory()) {
+            return new File[0];
+        }
+
+        File[] daftarFile = direktori.listFiles(
+                (dir, nama) -> nama.toLowerCase().endsWith(".txt"));
+
+        return daftarFile != null ? daftarFile : new File[0];
+    }
+
+    public void tampilkanDaftarStruk() {
+        File[] daftarFile = ambilDaftarStruk();
+
+        if (daftarFile.length == 0) {
+            System.out.println("Belum ada struk yang tersimpan.");
+            return;
+        }
+
+        System.out.println("\n========== STRUK TERSIMPAN ==========");
+
+        for (int i = 0; i < daftarFile.length; i++) {
+            System.out.printf("%d. %s%n", i + 1, daftarFile[i].getName());
+        }
+
+        System.out.println("=====================================");
+    }
+
+    public void pilihStruk(Scanner input) {
+        File[] daftarFile = ambilDaftarStruk();
+
+        if (daftarFile.length == 0) {
+            System.out.println("Belum ada struk yang tersimpan.");
+            return;
+        }
+
+        tampilkanDaftarStruk();
+        System.out.print("Pilih nomor struk yang ingin dilihat: ");
+        try {
+            int pilihan = Integer.parseInt(input.nextLine());
+
+            if (pilihan < 1 || pilihan > daftarFile.length) {
+                System.out.println("Nomor struk tidak valid.");
+                return;
+            }
+
+            String namaFile = daftarFile[pilihan - 1].getName();
+
+            System.out.println("\n========== DETAIL STRUK ==========");
+            bacaStruk(namaFile);
+        } catch (NumberFormatException e) {
+            System.out.println("Pilihan harus berupa angka.");
         }
     }
 }

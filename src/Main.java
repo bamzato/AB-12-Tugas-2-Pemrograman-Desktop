@@ -6,6 +6,7 @@ public class Main {
         Menu menu = new Menu();
         MenuFileManager menuFileManager = new MenuFileManager("data/menu.txt");
         menuFileManager.muatMenu(menu);
+        StrukFileManager strukFileManager = new StrukFileManager();
 
         boolean aplikasiBerjalan = true;
         while (aplikasiBerjalan) {
@@ -82,11 +83,24 @@ public class Main {
 
                         pesanan.tampilkanPesanan();
                         pesanan.tampilkanStruk();
+                        System.out.print("Simpan struk transaksi? (y/n): ");
+                        String jawaban = input.nextLine();
+
+                        if (jawaban.equalsIgnoreCase("y")) {
+                            System.out.print("Masukkan nama file struk: ");
+                            String namaFile = input.nextLine();
+
+                            if (!namaFile.endsWith(".txt")) {
+                                namaFile += ".txt";
+                            }
+
+                            strukFileManager.simpanStruk(pesanan, namaFile);
+                        }
                         break;
                     }
 
                     case 5:
-                        System.out.println("Fitur lihat struk belum tersedia.");
+                        strukFileManager.pilihStruk(input);
                         break;
 
                     case 6:
