@@ -5,3 +5,6 @@ MINUMAN|Jus Alpukat|12000.0|Minuman Dingin
 DISKON|Diskon Akhir Pekan|15.0
 MAKANAN|Ayam Bakar|30000.0|Makanan Berat
 MINUMAN|Es Jeruk|7000.0|Minuman Dingin
+MAKANAN|Sate Klathak|30000.0|Makanan Berat
+MINUMAN|Coca Cola|5000.0|Minuman Ringan
+DISKON|Diskon Ulang Tahun|10.0

@@ -1,35 +1,61 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        Menu menu = new Menu();
+        MenuFileManager menuFileManager = new MenuFileManager("data/menu.txt");
+        menuFileManager.muatMenu(menu);
 
         boolean aplikasiBerjalan = true;
-
         while (aplikasiBerjalan) {
             System.out.println("\n====================================");
             System.out.println("          RESTORAN MAKANAN");
             System.out.println("====================================");
             System.out.println("1. Tampilkan Menu Restoran");
             System.out.println("2. Tambah Menu Baru");
-            System.out.println("3. Buat Pesanan");
-            System.out.println("4. Lihat Struk Tersimpan");
-            System.out.println("5. Keluar");
+            System.out.println("3. Hapus Menu");
+            System.out.println("4. Buat Pesanan");
+            System.out.println("5. Lihat Struk Tersimpan");
+            System.out.println("6. Keluar");
             System.out.println("====================================");
 
             try {
                 System.out.print("Pilih menu (1-5): ");
-                int pilihan = input.nextInt();
+                int pilihan = Integer.parseInt(input.nextLine());
 
                 switch (pilihan) {
                     case 1:
-                        System.out.println("Fitur tampilkan menu belum tersedia.");
+                        System.out.println("\n========== DAFTAR MENU RESTORAN ==========");
+                        menu.tampilkanMenu();
                         break;
 
-                    case 2:
-                        System.out.println("Fitur tambah menu belum tersedia.");
+                    case 2: {
+                        int pilihanTambah = tampilkanSubmenuTambahMenu(input);
+
+                        switch (pilihanTambah) {
+                            case 1:
+                                tambahMakanan(input, menu, menuFileManager);
+                                break;
+
+                            case 2:
+                                tambahMinuman(input, menu, menuFileManager);
+                                break;
+
+                            case 3:
+                                tambahDiskon(input, menu, menuFileManager);
+                                break;
+
+                            case 4:
+                                System.out.println("Kembali ke menu utama.");
+                                break;
+
+                            default:
+                                System.out.println("Pilihan submenu tidak valid.");
+                        }
+
                         break;
+                    }
 
                     case 3:
                         System.out.println("Fitur buat pesanan belum tersedia.");
@@ -48,12 +74,110 @@ public class Main {
                         System.out.println("Pilihan tidak valid. Silakan pilih angka 1-5.");
                 }
 
-            } catch (InputMismatchException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Input harus berupa angka.");
-                input.nextLine();
             }
         }
 
         input.close();
+    }
+
+    private static int tampilkanSubmenuTambahMenu(Scanner input) {
+        System.out.println("\n====================================");
+        System.out.println("           TAMBAH MENU BARU");
+        System.out.println("====================================");
+        System.out.println("1. Tambah Makanan");
+        System.out.println("2. Tambah Minuman");
+        System.out.println("3. Tambah Diskon");
+        System.out.println("4. Kembali");
+        System.out.println("====================================");
+
+        System.out.print("Pilih jenis menu: ");
+
+        try {
+            return Integer.parseInt(input.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Input harus berupa angka.");
+            return 0;
+        }
+    }
+
+    private static void tambahMakanan(Scanner input, Menu menu, MenuFileManager menuFileManager) {
+        try {
+            System.out.println("\n========== TAMBAH MAKANAN ==========");
+
+            System.out.print("Nama makanan: ");
+            String nama = input.nextLine();
+
+            System.out.print("Harga makanan: ");
+            double harga = Double.parseDouble(input.nextLine());
+
+            System.out.print("Jenis makanan: ");
+            String jenisMakanan = input.nextLine();
+
+            Makanan makanan = new Makanan(nama, harga, jenisMakanan);
+
+            menu.tambahMenu(makanan);
+            menuFileManager.simpanMenu(menu);
+
+            System.out.println("Makanan berhasil ditambahkan.");
+        } catch (NumberFormatException e) {
+            System.out.println("Harga harus berupa angka.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Data makanan tidak valid: " + e.getMessage());
+        }
+    }
+
+    private static void tambahMinuman(Scanner input, Menu menu, MenuFileManager menuFileManager) {
+
+        try {
+            System.out.println("\n========== TAMBAH MINUMAN ==========");
+
+            System.out.print("Nama minuman: ");
+            String nama = input.nextLine();
+
+            System.out.print("Harga minuman: ");
+            double harga = Double.parseDouble(input.nextLine());
+
+            System.out.print("Jenis minuman: ");
+            String jenisMinuman = input.nextLine();
+
+            Minuman minuman = new Minuman(nama, harga, jenisMinuman);
+
+            menu.tambahMenu(minuman);
+            menuFileManager.simpanMenu(menu);
+
+            System.out.println("Minuman berhasil ditambahkan.");
+        } catch (NumberFormatException e) {
+            System.out.println("Harga harus berupa angka.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Data minuman tidak valid: " + e.getMessage());
+        }
+    }
+
+    private static void tambahDiskon(Scanner input,Menu menu, MenuFileManager menuFileManager) {
+
+        try {
+            System.out.println("\n========== TAMBAH DISKON ==========");
+
+            System.out.print("Nama diskon: ");
+            String nama = input.nextLine();
+
+            System.out.print("Persentase diskon (%): ");
+            double persentase = Double.parseDouble(input.nextLine());
+
+            Diskon diskon = new Diskon(nama, persentase);
+
+            menu.tambahMenu(diskon);
+            menuFileManager.simpanMenu(menu);
+
+            System.out.println("Diskon berhasil ditambahkan.");
+
+        } catch (NumberFormatException e) {
+            System.out.println("Persentase diskon harus berupa angka.");
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Data diskon tidak valid: " + e.getMessage());
+        }
     }
 }
