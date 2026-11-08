@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Pesanan {
     private ArrayList<DetailPesanan> daftarPesanan;
+    private Diskon diskon;
 
     public Pesanan() {
         this.daftarPesanan = new ArrayList<>();
@@ -76,5 +77,25 @@ public class Pesanan {
                 "TOTAL PESANAN",
                 hitungTotal());
         System.out.println("===============================================================");
+    }
+
+    public Diskon getDiskon() {
+        return diskon;
+    }
+
+    public void setDiskon(Diskon diskon) {
+        this.diskon = diskon;
+    }
+
+    public double hitungNilaiDiskon() {
+        if (diskon == null) {
+            return 0;
+        }
+
+        return hitungTotal() * diskon.getDiskon() / 100;
+    }
+
+    public double hitungTotalBayar() {
+        return hitungTotal() - hitungNilaiDiskon();
     }
 }
