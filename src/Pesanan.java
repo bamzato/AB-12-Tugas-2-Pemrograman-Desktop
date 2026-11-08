@@ -98,4 +98,69 @@ public class Pesanan {
     public double hitungTotalBayar() {
         return hitungTotal() - hitungNilaiDiskon();
     }
+
+    public String buatStruk() {
+        if (daftarPesanan.isEmpty()) {
+            return "Belum ada pesanan.";
+        }
+
+        StringBuilder struk = new StringBuilder();
+
+        struk.append("========================================================\n");
+        struk.append("                   RESTORAN MAKANAN                     \n");
+        struk.append("                    STRUK PESANAN                       \n");
+        struk.append("========================================================\n");
+
+        struk.append(String.format("%-20s %12s %6s %14s%n", "Nama Menu", "Harga", "Jumlah", "Subtotal"));
+
+        struk.append("-------------------------------------------------------- \n");
+
+        for (DetailPesanan detail : daftarPesanan) {
+            struk.append(String.format(
+                    "%-20s %12.2f %6d %14.2f%n",
+                    detail.getMenuItem().getNama(),
+                    detail.getMenuItem().getHarga(),
+                    detail.getJumlah(),
+                    detail.hitungSubtotal()));
+        }
+
+        struk.append("-------------------------------------------------------- \n");
+
+        struk.append(String.format(
+                "%-40s %14.2f%n",
+                "Subtotal",
+                hitungTotal()));
+
+        if (diskon != null) {
+            struk.append(String.format(
+                    "Diskon: %s (%.2f%%)%n",
+                    diskon.getNama(),
+                    diskon.getDiskon()));
+
+            struk.append(String.format(
+                    "%-40s %14.2f%n",
+                    "Nilai Diskon",
+                    -hitungNilaiDiskon()));
+        } else {
+            struk.append("Diskon: Tidak ada\n");
+        }
+
+        struk.append("-------------------------------------------------------- \n");
+
+        struk.append(String.format(
+                "%-40s %14.2f%n",
+                "TOTAL PEMBAYARAN",
+                hitungTotalBayar()));
+
+        struk.append("========================================================\n");
+        struk.append("           Terima kasih atas kunjungan Anda!            \n");
+        struk.append("              Selamat menikmati hidangan.               \n");
+        struk.append("========================================================\n");
+
+        return struk.toString();
+    }
+
+    public void tampilkanStruk() {
+        System.out.println(buatStruk());
+    }
 }
