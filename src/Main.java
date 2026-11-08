@@ -1,32 +1,24 @@
-import java.util.Scanner;
-import java.util.InputMismatchException;
-
 public class Main {
     public static void main(String[] args) {
+        Menu menu = new Menu();
+        MenuFileManager fileManager = new MenuFileManager("data/menu.txt");
 
-        Scanner input = new Scanner(System.in);
+        // 1. Memuat menu dari file
+        fileManager.muatMenu(menu);
 
-        int jumlah = 0;
-        boolean inputValid = false;
+        // 2. Menambahkan menu baru
+        // menu.tambahMenu(new Makanan("Ayam Bakar", 30000, "Makanan Berat"));
 
-        while (!inputValid) {
-            try {
-                System.out.print("Masukkan jumlah pesanan: ");
-                jumlah = input.nextInt();
+        // menu.tambahMenu(new Minuman("Es Jeruk", 7000, "Minuman Dingin"));
 
-                if (jumlah <= 0) {
-                    System.out.println("Jumlah pesanan harus lebih dari 0!");
-                } else {
-                    inputValid = true;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Input harus berupa angka!");
-                input.next();
-            }
-        }
+        // 3. Menampilkan seluruh menu
+        // System.out.println("DAFTAR MENU TERBARU");
+        menu.tampilkanMenu();
 
-        System.out.println("Jumlah pesanan: " + jumlah);
-        System.out.println("Program selesai.");
-        input.close();
+        // 4. Menyimpan menu ke file
+        // fileManager.simpanMenu(menu);
+
+        // 5. Menampilkan jumlah menu
+        System.out.println("\nTotal item menu: " + menu.getDaftarMenu().size());
     }
 }
