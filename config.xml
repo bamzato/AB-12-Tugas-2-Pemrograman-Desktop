@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>console</headerType>
+  <jar>D:\20260126 - Kerjaan\20260208 - Universitas Terbuka\20260412 - Pembejalaran\Ganjil 2026-2027\Pemrograman Berbasis Desktop - STSI4201\Project\AB-12-Tugas-2-Pemrograman-Desktop\AplikasiRestoran.jar</jar>
+  <outfile>D:\20260126 - Kerjaan\20260208 - Universitas Terbuka\20260412 - Pembejalaran\Ganjil 2026-2027\Pemrograman Berbasis Desktop - STSI4201\Project\AB-12-Tugas-2-Pemrograman-Desktop\AplikasiRestoran.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>true</requires64Bit>
+    <minVersion>25</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>
