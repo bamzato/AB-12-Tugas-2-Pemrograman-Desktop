@@ -1,13 +1,32 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+
 public class Main {
     public static void main(String[] args) {
 
-        MenuItem nasiGoreng = new Makanan(
-                "Nasi Goreng", 25000, "Makanan Berat");
+        Scanner input = new Scanner(System.in);
 
-        MenuItem esTeh = new Minuman(
-                "Es Teh", 5000, "Dingin");
+        int jumlah = 0;
+        boolean inputValid = false;
 
-        Pesanan pesananKosong = new Pesanan();
-        pesananKosong.tampilkanPesanan();
+        while (!inputValid) {
+            try {
+                System.out.print("Masukkan jumlah pesanan: ");
+                jumlah = input.nextInt();
+
+                if (jumlah <= 0) {
+                    System.out.println("Jumlah pesanan harus lebih dari 0!");
+                } else {
+                    inputValid = true;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Input harus berupa angka!");
+                input.next();
+            }
+        }
+
+        System.out.println("Jumlah pesanan: " + jumlah);
+        System.out.println("Program selesai.");
+        input.close();
     }
 }
